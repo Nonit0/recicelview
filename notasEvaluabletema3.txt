@@ -1,0 +1,31 @@
+App para ver personajes de una serie, por ejemplo csm:
+    Personajes: Makima
+Ejemplo:
+    Vista deslizante en horizontal, al deslizar cambias de personaje:
+    Preview del personaje(makima_poster.jpeg) -> la idea es escribir nosotros el texto, con viewtext, usando la imagen base_makima_poster.jpeg (añadir antes un filtro de ruido para ser mas parecido al original)
+    Boton de editar, para cambiar el nombre y la info que colocamos.
+    Boton a parte para añadir tu propio personaje, añadiendo una imagen, texto y demás con la plantilla base
+
+ver kotlin hasta api,
+companionn objets __> metodos atributos estáticos
+by lazy --> delega la instancia a kotlin (by) y kotlin la ejecuta cuando se instancie el mydao en algun momento desde cualquier parte de la app, ya que el constructor será privado, par ano rep
+
+viewholder -> 3 métodos override, 
+getitemcount: Int(){}, 
+oncreateviewholder(viewgroup,viewtype): ViewHolder /*de nuetra lista -> viewholderhotel*/(){
+    layoutinflter
+    layoutitemhotel
+    return viewholder
+},
+onbindviewholder(holder,position){
+    holder.renderize(objetolista)
+}
+
+adapter
+
+controller (context)
+
+
+mainActivity
+
+
