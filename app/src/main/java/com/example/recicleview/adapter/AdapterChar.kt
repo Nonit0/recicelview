@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recicleview.models.Char
 import com.example.recicleview.R
 
-class AdapterChar(var listChar: MutableList<Char>) :
+class AdapterChar(
+    var listChar: MutableList<Char>,
+    val onDeleteChar: (position: Int)-> Unit, // Implementamos los botones que tendraá cada instancia de CHAR en nuestro recicleView
+    val onUpdateChar: (position: Int)-> Unit // Estos vienen del viewHolder
+) :
     RecyclerView.Adapter<ViewHolderChar>() {
 
     /*
@@ -22,7 +26,7 @@ class AdapterChar(var listChar: MutableList<Char>) :
      Este metodo renderiza todos los datos de cada char
      */
     override fun onBindViewHolder(holder: ViewHolderChar, position: Int) {
-        holder.renderize(listChar[position])
+        holder.renderize(listChar[position],onDeleteChar,onUpdateChar)
     }
 
     /*
