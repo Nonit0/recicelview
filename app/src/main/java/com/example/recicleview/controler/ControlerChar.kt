@@ -34,7 +34,7 @@ class ControlerChar(val context: Context) {
         if (pos >= 0 && pos < listChar.size) {
             val charToDelete = listChar[pos]
 
-            Toast.makeText( context, "Borraremos el char $${charToDelete.name}",
+            Toast.makeText( context, "Borraremos el char ${charToDelete.name}",
                 Toast.LENGTH_LONG).show()
 
             listChar.removeAt(pos)
@@ -44,6 +44,20 @@ class ControlerChar(val context: Context) {
 
             Toast.makeText(context, "Eliminado: ${charToDelete.name}", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun addChar(newChar: Char) {
+        // 1. Modificar la Fuente de Datos: Añadir el nuevo objeto a la lista
+        listChar.add(newChar)
+
+        // 2. Notificar al Adaptador para que la vista se actualice
+        // Usamos notifyItemInserted para una animación más eficiente y específica.
+        // El índice es el último de la lista (el tamaño actual menos 1).
+        val position = listChar.size - 1
+        adapterChar.notifyItemInserted(position)
+
+        // Opcional: Mostrar un mensaje al usuario
+        Toast.makeText(context, "¡Personaje '${newChar.name}' añadido con éxito!", Toast.LENGTH_SHORT).show()
     }
 
     // ESTA es la función que pasas al Adapter en setAdapter()
@@ -85,6 +99,7 @@ class ControlerChar(val context: Context) {
             Toast.makeText(context, "Personaje actualizado: ${modifiedChar.name}", Toast.LENGTH_SHORT).show()
         }
     }
+
     fun setAdapter() {
         val myActivity = context as MainActivity
 

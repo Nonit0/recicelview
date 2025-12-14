@@ -26,7 +26,7 @@ class AdapterChar(
      Este metodo renderiza todos los datos de cada char
      */
     override fun onBindViewHolder(holder: ViewHolderChar, position: Int) {
-        holder.renderize(listChar.get(position))
+        holder.renderize(listChar[position])
     }
 
     /*

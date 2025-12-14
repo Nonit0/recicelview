@@ -15,5 +15,22 @@
         android:padding="25dp"
         />
 
+    <!-- bottom: Ancla el botón a la parte inferior del FrameLayout.
+    center_horizontal: Centra el botón horizontalmente.
+    android:layout_marginBottom="32dp" añade un margen desde el borde inferior
+    para que no esté pegado. -->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_char"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        android:contentDescription="@string/a_adir_nuevo_personaje"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:tint="@android:color/white"
+        />
+
 
 </FrameLayout>
