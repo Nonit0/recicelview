@@ -9,7 +9,7 @@ import com.example.recicleview.R
 class AdapterChar(
     var listChar: MutableList<Char>,
     val onDeleteChar: (Int)-> Unit, // Implementamos los botones que tendraá cada instancia de CHAR en nuestro recicleView
-    val onUpdateChar: (Int)-> Unit // Estos vienen del viewHolder
+    val onUpdateChar: (Int, Char)-> Unit // Estos vienen del viewHolder
 ) : RecyclerView.Adapter<ViewHolderChar>() {
 
     /*

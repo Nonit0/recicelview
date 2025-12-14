@@ -61,20 +61,12 @@ class ControlerChar(val context: Context) {
     }
 
     // ESTA es la función que pasas al Adapter en setAdapter()
-    fun updateChar(pos: Int) {
-        if (pos >= 0 && pos < listChar.size) {
-            val charToEdit = listChar[pos]
-
-            // Lógica: Abrir el diálogo o Activity de edición.
-            // Aquí NO tienes los nuevos datos todavía.
-            Toast.makeText(context, "Abriendo edición para: ${charToEdit.name}", Toast.LENGTH_SHORT).show()
-
-            // Aquí se crea y muestra el diálogo.
-            // val dialog = EditCharDialogFragment.newInstance(pos, charToEdit)
-            // dialog.show(myActivity.supportFragmentManager, "EditCharDialog")
-
-            // Mensaje
-            Toast.makeText(context, "Abriendo edición para: ${charToEdit.name}", Toast.LENGTH_SHORT).show()
+    fun updateChar(pos: Int, charToEdit: Char) {
+        if (context is MainActivity) {
+            // Delegamos la tarea de abrir el diálogo de edición a la Activity.
+            context.showEditDialog(pos, charToEdit)
+        } else {
+            Toast.makeText(context, "Error: Contexto no es MainActivity.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -84,17 +76,11 @@ class ControlerChar(val context: Context) {
         if (pos >= 0 && pos < listChar.size) {
 
             // Asumiendo que listChar es una lista de objetos de datos (data class)
-
             // 1. Reemplazas el objeto viejo de la lista con el objeto modificado
             listChar[pos] = modifiedChar
 
             // 2. Notificar al Adapter que SOLO esta posición cambió
             adapterChar.notifyItemChanged(pos)
-
-            // 3. Lógica de Base de Datos:
-            // Usas el ID existente en modifiedChar.id para UPDATE
-            //Si hubiera una base de datos, por ejemplo
-            // DaoChar.myDao.updateChar(modifiedChar)
 
             Toast.makeText(context, "Personaje actualizado: ${modifiedChar.name}", Toast.LENGTH_SHORT).show()
         }
@@ -111,7 +97,7 @@ class ControlerChar(val context: Context) {
         adapterChar = AdapterChar(
             listChar,
             onDeleteChar = { pos -> delChar(pos) },
-            onUpdateChar = { pos -> updateChar(pos) }
+            onUpdateChar = { pos, char -> updateChar(pos, char) }
         )
 
         // Asignar el adapter al RecyclerView

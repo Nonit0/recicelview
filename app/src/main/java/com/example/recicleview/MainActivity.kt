@@ -41,17 +41,30 @@ class MainActivity : AppCompatActivity(), EditCharDialogListener {
         controller.addChar(newChar)
     }
 
-    // El método onCharEdited también debe estar aquí:
+    /**
+     * Llamado por DialogNewChar cuando el usuario pulsa "Guardar" en modo edición.
+     * Delega la acción de actualización al ControlerChar.
+     */
     override fun onCharEdited(position: Int, modifiedChar: Char) {
         controller.applyUpdate(position, modifiedChar)
     }
 
     /**
-     * Crea y muestra el DialogNewChar.
+     * Crea y muestra el DialogNewChar en modo AÑADIR.
      */
     fun showNewCharDialog() {
         val dialog = DialogNewChar()
         dialog.show(supportFragmentManager, "NewCharDialog")
+    }
+
+    /**
+     * Crea y muestra el DialogNewChar en modo EDICIÓN.
+     * Este es el puente que usa el ControlerChar cuando se pulsa el botón de editar.
+     */
+    fun showEditDialog(position: Int, charToEdit: Char) {
+        // Usamos el newInstance(position, char) para iniciar en modo EDIT
+        val dialog = DialogNewChar.newInstance(position, charToEdit)
+        dialog.show(supportFragmentManager, "EditCharDialog")
     }
 
 }

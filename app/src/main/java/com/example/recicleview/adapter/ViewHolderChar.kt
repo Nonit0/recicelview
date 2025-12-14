@@ -8,13 +8,16 @@ import com.example.recicleview.models.Char
 class ViewHolderChar(
     view: View,
     var onDeleteChar: (Int) -> Unit,
-    var onUpdateChar: (Int) -> Unit,
+    var onUpdateChar: (Int, Char) -> Unit,
     ) : RecyclerView.ViewHolder(view) {
 
     var binding: ItemCharBinding = ItemCharBinding.bind(view)
+    // Referencia para almacenar el objeto Char actual
+    private lateinit var currentCharacter: Char
 
     //Metodo que se encarga de mapear los item por propiedad del modelo.
     fun renderize(char: Char){
+        currentCharacter = char
         binding.txtviewCharName.text = char.name
         binding.txtviewCharType.text = char.type
         binding.txtviewCharOcupation.text = char.ocupation
@@ -33,7 +36,7 @@ class ViewHolderChar(
         binding.btnEditChar.setOnClickListener {
             // Obtiene la posición exacta con bindingAdapterPosition.
             val position = bindingAdapterPosition
-            onUpdateChar(position)
+            onUpdateChar(position, currentCharacter)
         }
         binding.btnDeleteChar.setOnClickListener {
             val position = bindingAdapterPosition
